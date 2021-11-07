@@ -15,8 +15,10 @@ pipeline {
                 sh 'terraform plan -no-color -out=pbx.tfplan'
             }
         }
-    }
-        stage ('Terraform Apply') {
-            sh label: '', script: "terraform --version"
+        stage('Terraform Apply') {
+            steps {
+                sh label: '', script: "terraform --version"
+            }   
         } 
+    }   
 }
