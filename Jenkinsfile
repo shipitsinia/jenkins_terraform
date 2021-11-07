@@ -17,6 +17,6 @@ pipeline {
         }
     }
         stage ('Terraform Apply') {
-            sh "terraform --version"
+            sh label: '', script: "terraform --version"
         } 
 }
