@@ -1,20 +1,22 @@
 pipeline {
-  agent {
-    docker {
-      image 'hashicorp/terraform:light'
-      args '--entrypoint='
+    agent {
+        docker {
+            image 'hashicorp/terraform:light'
+            args '--entrypoint='
+        }
     }
-  }
-  stages {
-    stage('Terraform Plan') { 
-      steps {
-        sh 'terraform plan -no-color -out=pbx.tfplan' 
-      }
+    environment {
+        aws_access_key = credentials('aws_access_key')
+        aws_secret_key = credentials('aws_secret_key')
     }
-    input 'Deploy stack?'
-
-    stage ('Terraform Apply') {
-      sh "terraform --version"
+    stages {
+        stage('Terraform') {
+            steps {
+                sh 'terraform plan -no-color -out=pbx.tfplan'
+            }
+        }
     }
-  }
+        stage ('Terraform Apply') {
+            sh "terraform --version"
+        } 
 }
