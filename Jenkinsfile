@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'hashicorp/terraform:light'
-            args '-i --entrypoint='
-        }
+        docker { image 'node:14-alpine' }
     }
     environment {
         aws_access_key = credentials('aws_access_key')
