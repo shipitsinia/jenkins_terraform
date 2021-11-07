@@ -20,4 +20,5 @@ pipeline {
                 sh 'terraform --version'
             }   
         } 
-    }   
+    } 
+}
