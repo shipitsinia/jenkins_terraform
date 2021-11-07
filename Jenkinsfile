@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image 'hashicorp/terraform:light'
-            args '-it --entrypoint=/bin/bash'
+            args '-i --entrypoint='
         }
     }
     environment {
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Terraform Apply') {
             steps {
-                sh label: '', script: "terraform --version"
+                sh 'terraform --version'
             }   
         } 
     }   
